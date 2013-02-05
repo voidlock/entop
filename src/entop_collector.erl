@@ -48,4 +48,5 @@ process_info_items(P) ->
                             message_queue_len,
                             heap_size,
                             stack_size,
-                            total_heap_size]).
+                            total_heap_size,
+                            memory]).

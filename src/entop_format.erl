@@ -44,7 +44,8 @@ init(Node) ->
 	       {"MQueue", 6, []},
 	       {"HSize", 6, []},
 	       {"SSize", 6, []},
-	       {"HTot", 6, []}],
+	       {"HTot", 6, []},
+	       {"Memory", 12, []}],
     {ok, {Columns, 3}, #state{ node = Node }}.
 
 %% Header Callback
@@ -91,7 +92,8 @@ row(ProcessInfo, State) ->
     Heap = proplists:get_value(heap_size, ProcessInfo, 0),
     Stack = proplists:get_value(stack_size, ProcessInfo, 0),
     HeapTot = proplists:get_value(total_heap_size, ProcessInfo, 0),
-    {ok, {Pid, RegName, Reductions, Queue, Heap, Stack, HeapTot}, State}.
+    Memory = proplists:get_value(memory, ProcessInfo, 0),
+    {ok, {Pid, RegName, Reductions, Queue, Heap, Stack, HeapTot, Memory}, State}.
 
 mem2str(Mem) ->
     if Mem > ?GIB -> io_lib:format("~.1fm",[Mem/?MIB]);
